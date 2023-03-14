@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ado-dotnet
+spec:
+  selector:
+    matchLabels:
+      app: ado-dotnet
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ado-dotnet
+    spec:
+      containers:
+        - name: ado-dotnet
+          image: image-registry.openshift-image-registry.svc:5000/ado-openshift/ado-dotnet
+          ports:
+            - containerPort: 8080
+

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ado-dotnet
+spec:
+  selector:
+    app: ado-dotnet
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
