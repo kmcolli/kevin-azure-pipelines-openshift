@@ -5,9 +5,8 @@ pool:
   name: Default
 
 variables:
-  project-name-dev: 'my-dev'
-  project-name-uat: 'my-uat'
-  image-name: 'kevin-dotnet'
+  project-name-dev: 'ado-openshift'
+  image-name: 'ado-dotnet'
 
 stages:
 - stage: Build
@@ -20,7 +19,7 @@ stages:
       displayName: 'Build Docker image'
       inputs:
         command: 'build'
-        containerRegistry: 'kevin ROSA internal registry'
+        containerRegistry: 'openshift-registry'
         buildContext: 'App'
         repository: '$(project-name-dev)/$(image-name)'
         Dockerfile: 'Dockerfile'
@@ -29,7 +28,7 @@ stages:
       displayName: 'Push Docker image to OpenShift internal registry'
       inputs:
         command: 'push'
-        containerRegistry: 'kevin ROSA internal registry'
+        containerRegistry: 'openshift-registry'
         repository: '$(project-name-dev)/$(image-name)'
         tags: $(Build.BuildId)
     - task: PublishPipelineArtifact@1
@@ -51,7 +50,7 @@ stages:
       displayName: Deploy to Kubernetes cluster
       inputs:
         action: deploy
-        kubernetesServiceConnection: 'openshift-test-1678724092579'
+        kubernetesServiceConnection: 'openshift'
         namespace: '$(project-name-dev)'
         manifests: |
           $(Build.SourcesDirectory)/manifests/*.yaml
