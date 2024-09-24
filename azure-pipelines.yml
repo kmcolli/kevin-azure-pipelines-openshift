@@ -17,7 +17,7 @@ stages:
     steps:
     - task: DockerInstaller@0
       inputs:
-        dockerVersion: '24.0.1'
+        dockerVersion: '24.0.2'
     - task: Docker@2.240.2
       displayName: 'Build Docker image'
       inputs:
