@@ -15,7 +15,7 @@ stages:
   - job: BuildAndPushJob
     displayName: Build and Push Job
     steps:
-    - task: Docker@2
+    - task: Docker@2.240.1
       displayName: 'Build Docker image'
       inputs:
         command: 'build'
@@ -24,7 +24,7 @@ stages:
         repository: '$(project-name-dev)/$(image-name)'
         Dockerfile: 'Dockerfile'
         tags: $(Build.BuildId)
-    - task: Docker@2
+    - task: Docker@2.240.1
       displayName: 'Push Docker image to OpenShift internal registry'
       inputs:
         command: 'push'
