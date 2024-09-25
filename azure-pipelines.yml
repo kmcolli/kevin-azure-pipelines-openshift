@@ -55,12 +55,3 @@ stages:
         manifests: |
           $(Build.SourcesDirectory)/manifests/*.yaml
         containers: 'image-registry.openshift-image-registry.svc:5000/$(project-name-dev)/$(image-name):$(Build.BuildId)'
-    - task: KubernetesManifest@0
-      displayName: Deploy to Kubernetes cluster1
-      inputs:
-        action: deploy
-        kubernetesServiceConnection: 'openshift'
-        namespace: '$(project-name-dev)'
-        manifests: |
-          $(Build.SourcesDirectory)/manifests/*.yaml
-        containers: 'image-registry.openshift-image-registry.svc:5000/$(project-name-dev)/$(image-name):$(Build.BuildId)'
